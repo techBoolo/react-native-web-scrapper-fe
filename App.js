@@ -7,11 +7,12 @@ import Logo from './components/Logo'
 import LoginButton from './components/LoginButton'
 import AdminButton from './components/AdminButton'
 import BackButton from './components/BackButton'
+import Tabs from './navigation/tabs.js'
 
 const Stack = createNativeStackNavigator()
 
 export default function App() {
-  const [ isLogin, setIsLogin ] = useState(true)
+  const [ isLogin, setIsLogin ] = useState(false)
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -26,7 +27,7 @@ export default function App() {
           }
         }}
       >
-        <Stack.Screen name='Home' component={Home} 
+        <Stack.Screen name='Home' component={Tabs} 
           options={({ navigation }) => ({
             headerTitle: (props) => (<Logo {...props} />),
             headerRight: (props) => ( 

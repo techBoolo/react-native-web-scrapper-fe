@@ -1,30 +1,37 @@
 import { useState } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native'
+import { useDispatch } from 'react-redux'
 import userServices from '../../services/user.js'
 import errorMessage from '../../utils/errorMessage.js'
+import { notify } from '../../redux/reducers/notificationSlice.js'
+import { login } from '../../redux/reducers/userSlice.js'
+import { View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
+
+import { Notification } from '../../components/index.js'
+
 const Login = ({ navigation }) => {
   const [ name, setName ] = useState('')
   const [ password, setPassword ] = useState('')
+  const dispatch = useDispatch()
 
   const handleLogin = async () => {
     const loginInfo = { name, password }
-
     try {
       const response = await userServices.login(loginInfo)
       const { message, token } = response.data
-      // save token in redux and local/secure storage
+      window.localStorage.setItem('user', token)
+      dispatch(login({ token }))
       navigation.navigate('Admin')
     } catch (err) {
       const message = errorMessage(err)
-      console.log(message);  // notify user 
+      dispatch(notify({ message, _status: 'error' }))
       return
     }
-
   }
 
   return (
     <View style={styles.container}>
+      <Notification />
       <Text>S</Text>
       <View style={styles.fieldContainer}>
         <Icon name='person-outline' size={20} color='#ccc' />

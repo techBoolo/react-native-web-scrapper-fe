@@ -10,6 +10,15 @@ const login = async (loginInfo) => {
   )
 }
 
+const authenticate = async (token) => {
+  return await axios.put(
+    `${url}/users/authenticate`, 
+    { token },
+    { 'Content-Type': 'application/json'}
+  )
+}
+
 export default {
-  login
+  login,
+  authenticate,
 }

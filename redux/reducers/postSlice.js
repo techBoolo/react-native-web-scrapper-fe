@@ -10,9 +10,19 @@ const postSlice = createSlice({
   reducers: {
     posts: (state, action) => {
       state.posts = action.payload
+    },
+    updatePost: (state, action) => {
+      const newPost = action.payload
+      state.posts = state.posts.map(post => {
+        if(newPost.source == post.source) {
+          return newPost
+        } else {
+          return post
+        }
+      })
     }
   }
 })
 
-export const { posts } = postSlice.actions
+export const { posts, updatePost } = postSlice.actions
 export default postSlice.reducer

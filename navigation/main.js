@@ -41,7 +41,7 @@ export default function Main() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName=""
+        initialRouteName="Tabs"
         screenOptions={{
           headerStyle: { 
             backgroundColor: '#00f',
@@ -53,7 +53,7 @@ export default function Main() {
           }
         }}
       >
-        <Stack.Screen name='Home' component={Tabs} 
+        <Stack.Screen name='Tabs' component={Tabs} 
           options={({ navigation }) => ({
             headerTitle: (props) => (<Logo {...props} />),
             headerRight: (props) => ( 
